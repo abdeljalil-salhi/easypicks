@@ -4,6 +4,8 @@ import { Server, IncomingMessage, ServerResponse, createServer } from "http";
 import { resolve, join } from "path";
 import { connect } from "mongoose";
 
+import userRouter from "./routers/user.router";
+
 const bootstrap = async (): Promise<void> => {
   config({
     path: ".env.production",
@@ -28,6 +30,7 @@ const bootstrap = async (): Promise<void> => {
 
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
+  app.use("/api/users", userRouter);
 
   app.use(
     (

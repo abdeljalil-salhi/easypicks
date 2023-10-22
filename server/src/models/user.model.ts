@@ -1,4 +1,6 @@
-import { Model, Schema, model } from "mongoose";
+import { Document, Model, Schema, Types, model } from "mongoose";
+
+import { Seller, sellerSchema } from "./seller.model";
 
 interface User {
   name: string;
@@ -7,13 +9,7 @@ interface User {
   isAdmin: boolean;
   isVerified: boolean;
   isSeller: boolean;
-  seller: {
-    name: string;
-    logo: string;
-    description: string;
-    rating: number;
-    numReviews: number;
-  };
+  seller: Seller;
 }
 
 const userSchema: Schema<User> = new Schema(
@@ -46,37 +42,18 @@ const userSchema: Schema<User> = new Schema(
       default: false,
       required: true,
     },
-    seller: {
-      name: {
-        type: Schema.Types.String,
-        required: true,
-      },
-      logo: {
-        type: Schema.Types.String,
-        required: true,
-      },
-      description: {
-        type: Schema.Types.String,
-        default: "An approved seller",
-        required: true,
-      },
-      rating: {
-        type: Schema.Types.Number,
-        default: 0,
-        required: true,
-      },
-      numReviews: {
-        type: Schema.Types.Number,
-        default: 0,
-        required: true,
-      },
-    },
+    seller: sellerSchema,
   },
   {
     timestamps: true,
   }
 );
 
-const User: Model<User> = model("User", userSchema);
+const User: Model<User> = model<User, Model<User>>("User", userSchema);
+
+export type TUser = Document<unknown, {}, User> &
+  User & {
+    _id: Types.ObjectId;
+  };
 
 export default User;
