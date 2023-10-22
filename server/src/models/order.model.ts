@@ -1,4 +1,4 @@
-import { Model, Schema, model } from "mongoose";
+import { Document, Model, Schema, Types, model } from "mongoose";
 
 import {
   ShippingAddress,
@@ -80,5 +80,10 @@ const orderSchema: Schema<Order> = new Schema(
 );
 
 const Order: Model<Order> = model<Order, Model<Order>>("Order", orderSchema);
+
+export type TOrder = Document<unknown, {}, Order> &
+  Order & {
+    _id: Types.ObjectId;
+  };
 
 export default Order;

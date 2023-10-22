@@ -5,6 +5,9 @@ import { resolve, join } from "path";
 import { connect } from "mongoose";
 
 import userRouter from "./routers/user.router";
+import productRouter from "./routers/product.router";
+import orderRouter from "./routers/order.router";
+import uploadRouter from "./routers/upload.router";
 
 const bootstrap = async (): Promise<void> => {
   config({
@@ -30,7 +33,11 @@ const bootstrap = async (): Promise<void> => {
 
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
+
   app.use("/api/users", userRouter);
+  app.use("/api/products", productRouter);
+  app.use("/api/orders", orderRouter);
+  app.use("/api/upload", uploadRouter);
 
   app.use(
     (
