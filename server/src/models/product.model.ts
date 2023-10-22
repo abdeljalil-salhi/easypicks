@@ -1,4 +1,4 @@
-import { Model, Schema, model } from "mongoose";
+import { Document, Model, Schema, Types, model } from "mongoose";
 
 import { Review, reviewSchema } from "./review.model";
 
@@ -74,5 +74,10 @@ const Product: Model<Product> = model<Product, Model<Product>>(
   "Product",
   productSchema
 );
+
+export type TProduct = Document<unknown, {}, Product> &
+  Product & {
+    _id: Types.ObjectId;
+  };
 
 export default Product;

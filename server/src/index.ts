@@ -17,7 +17,7 @@ const bootstrap = async (): Promise<void> => {
   const server: Server<typeof IncomingMessage, typeof ServerResponse> =
     createServer(app);
 
-  await connect(process.env.MONGODB_URI)
+  connect(process.env.MONGODB_URI)
     .then(() => console.log("Connected to MongoDB"))
     .catch((err: Error) => {
       console.error("Error connecting to MongoDB");
