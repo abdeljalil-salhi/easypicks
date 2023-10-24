@@ -1,4 +1,8 @@
-import { Reducer, combineReducers, compose } from "redux";
+import { configureStore } from "@reduxjs/toolkit";
+import { ToolkitStore } from "@reduxjs/toolkit/dist/configureStore";
+import { combineReducers } from "redux";
+
+import { userSigninReducer } from "./reducers/user-signin.reducer";
 
 interface IState {
   user: {
@@ -22,7 +26,13 @@ export const initialState: IState = {
   },
 };
 
-const reducer: Reducer = combineReducers({});
+const reducer = combineReducers({
+  userSignin: userSigninReducer,
+});
 
-const composeEnhancer =
-  (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store: ToolkitStore = configureStore({
+  reducer,
+  preloadedState: initialState as unknown as object,
+});
+
+export default store;
