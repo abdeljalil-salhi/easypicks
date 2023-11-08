@@ -21,7 +21,7 @@
   "homepage": "https://github.com/abdeljalil-salhi/easypicks#readme",
   "devDependencies": {
     "@types/bcryptjs": "^2.4.5",
-    "@types/express": "^4.17.20",
+    "@types/express": "^4.17.21",
     "@types/jsonwebtoken": "^9.0.4",
     "@types/multer": "^1.4.9",
     "@types/node": "^20.8.7",
